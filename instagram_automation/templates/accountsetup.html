@@ -1,0 +1,190 @@
+{%extends 'base.html' %}
+{% load static  %}
+
+{% block title %}shop{% endblock %}
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/test.css' %}">
+
+{% endblock %}
+{% block body %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-5">
+                <section class="vh-70">
+                    <div class="container">
+                        <div class="row justify-content-center mt-5">
+                            <div class=" mt-5">
+                                <div class="modal-dialog modal-dialog-centered mt-5">
+                                    <div class="modal-content">
+                                        <div class="card " style="border-radius: 15px;">
+                                            <div class="card-body p-3 align-items-center">
+                                                <h3 class="text-uppercase text-center mb-3">Add Follow account</h3>
+                                                <form class="d-flex flex-column mt-n4" action="{% url 'addfollowaccount' %}" method="post">
+                                                    {% csrf_token %}
+                                                    <div class="form-outline mb-3 justify-content-center">
+                                                        <input type="text" id="form3Example1cg" name="username"
+                                                            class="form-control form-control-sm" />
+                                                        <label class="form-label" for="form3Example1cg">Account username</label>
+                                                    </div>
+        
+                                                    <div class="d-flex justify-content-center">
+                                                        <button type="submit" class="btn btn-success btn-sm btn-block text-body">add
+                                                            account</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        
+            <div class="col-md-6">
+                <section class="vh-70">
+                    <div class="container">
+                        <!-- Adjust col-md-4 to col-md-12 to make the right side take the entire width -->
+                        <div class="row justify-content-center mt-5">
+                            <div class="mt-5">
+                                <div class="modal-dialog modal-dialog-centered mt-5">
+                                    <div class="modal-content">
+                                        <div class="card " style="border-radius: 15px;">
+                                            <div class="card-body p-3 align-items-center">
+                                                <div class="card mask-custom">
+                                                    <div class="card-body p-2 text-black">
+                                                        <div class="text-center pt-1 pb-1">
+                                                            <h2 class="my-4">Accounts List</h2>
+                                                            <i class="bi bi-person" style="font-size: 60px; color: #c21b1b;"></i>
+                                                        </div>
+                                                        <table class="table text-black mb-0">
+                                                            <thead>
+                                                                
+                                                                
+                                                                <tr>
+                                                                    <th scope="col">Account</th>
+                                                                    <th scope="col">Delete</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {% for ac in accounts %} 
+                                                                <tr class="fw-normal">
+                                                                    
+                                                                    <td class="align-middle">
+                                                                        <span>{{ ac.username }}</span>
+                                                                    </td>
+                                                                    <td class="align-middle">
+                                                                        <a href="{% url 'deletefollowaccount' account_id=ac.id %}" data-mdb-toggle="tooltip" title="Remove"><i
+                                                                                class="fas fa-trash-alt fa-lg text-warning"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                                {% endfor %}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-5">
+                <section class="vh-70">
+                    <div class="container">
+                        <div class="row justify-content-center mt-5">
+                            <div class="mt-5">
+                                <div class="modal-dialog modal-dialog-centered mt-5">
+                                    <div class="modal-content">
+                                        <div class="card " style="border-radius: 15px;">
+                                            <div class="card-body p-3 align-items-center">
+                                                <h3 class="text-uppercase text-center mb-3">Add Directory link</h3>
+                                                <form class="d-flex flex-column mt-n4" action="{% url 'add_directorylink' %}" method="post">
+                                                    {% csrf_token %}
+                                                    <div class="form-outline mb-3 justify-content-center">
+                                                        <input type="text" id="form3Example1cg" name="link"
+                                                            class="form-control form-control-sm" />
+                                                        <label class="form-label" for="form3Example1cg">Link</label>
+                                                    </div>
+        
+                                                    <div class="d-flex justify-content-center">
+                                                        <button type="submit" class="btn btn-success btn-sm btn-block text-body">add
+                                                            Link</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        
+            <div class="col-md-6">
+                <section class="vh-70">
+                    <div class="container">
+                        <!-- Adjust col-md-4 to col-md-12 to make the right side take the entire width -->
+                        <div class="row justify-content-center mt-5">
+                            <div class="mt-5">
+                                <div class="modal-dialog modal-dialog-centered mt-5">
+                                    <div class="modal-content">
+                                        <div class="card " style="border-radius: 15px;">
+                                            <div class="card-body p-3 align-items-center">
+                                                <div class="card mask-custom">
+                                                    <div class="card-body  text-blue">
+                                                        <div class="text-center pt-1 pb-1">
+                                                            <h2 class="my-4">Link</h2>
+                                                            <i class="bi bi-person" style="font-size: 60px; color: #b82d2d;"></i>
+                                                        </div>
+                                                        <table class="table text-blue mb-0">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">Link</th>
+                                                                    <th scope="col">Change</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                               
+
+                                                                {% for ac in link %} 
+                                                                <tr class="fw-normal">
+                                                                    
+                                                                    <td class="align-middle">
+                                                                        <span>{{ ac.link }}</span>
+                                                                    </td>
+                                                                    <td class="align-middle">
+                                                                        <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i class="bi bi-type-underline"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                                {% endfor %}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

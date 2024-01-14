@@ -1,0 +1,86 @@
+{%extends 'base.html' %}
+{% load static  %}
+
+{% block title %}shop{% endblock %}
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/control.css' %}">
+
+{% endblock %}
+{% block body %}
+
+<section class="vh-70">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6 mt-5"> <div class="modal-dialog modal-dialog-centered mt-5">
+            <div class="modal-content">
+              <div class="card" style="border-radius: 15px;">
+                <div class="card-body p-3 align-items-center">
+                  <h3 class="text-uppercase text-center mb-3">Manage account</h3>
+                  <section class="intro">
+                    <div class="bg-image h-100" style="background-image: url(https://mdbootstrap.com/img/Photos/new-templates/glassmorphism-article/img7.jpg);">
+                      <div class="mask d-flex align-items-center h-100">
+                        <div class="container">
+                          <div class="row justify-content-center">
+                            <div class="col-12">
+                              <div class="card mask-custom">
+                                <div class="card-body">
+                                  <div class="table-responsive">
+                                    <table class="table table-borderless text-white mb-0">
+                                      <thead>
+                                        <tr>
+                                          <th scope="col">Account</th>
+                                          <th scope="col">Follow status</th>
+                                          <th scope="col">Unfollow status</th>
+                                          <th scope="col">Post status</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        {% for account in acc %} 
+                                        <tr>
+                                            <th scope="row">{{account.username}}</th>
+                                            {% if account.follow_status %}
+
+                                                <td><a href="{% url 'deactivatefollow' account_id=account.id %}" class="btn btn-danger active">Deactivate Follow</a></td>
+                                            {% else %}
+        
+                                                <td><a href="{% url 'activatefollow' account_id=account.id %}" class="btn btn-success active">Activate Follow</a></td>
+                                            {% endif %}
+                                            {% if account.unfollow_status %}
+        
+                                                <td><a href="{% url 'deactivateunfollow' account_id=account.id %}" class="btn btn-danger active">Deactivate Unfollow</a></td>
+                                            {% else %}
+        
+                                                <td><a href="{% url 'activateunfollow' account_id=account.id %}" class="btn btn-success active">Activate Unfollow</a></td>
+                                            {% endif %}
+                                            {% if account.post_status %}
+        
+                                                <td><a href="{% url 'deactivatepost' account_id=account.id %}" class="btn btn-danger active">Deactivate Post</a></td>
+                                            {% else %}
+        #
+                                                <td><a href="{% url 'activatepost' account_id=account.id %}" class="btn btn-success active">Activate Post</a></td>
+                                            {% endif %}
+
+                                        </tr>
+                                        {% endfor %}
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+{% endblock %}

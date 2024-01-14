@@ -1,0 +1,23 @@
+ECHO is on.
+# .gitignore
+
+# Ignore virtual environment
+venv/
+
+# Ignore Python bytecode
+__pycache__/
+
+# Ignore the .env file
+.env
+
+# Ignore SQLite database file
+*.sqlite3
+
+# Ignore image files
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# Ignore other files and directories
+# Add more patterns as needed

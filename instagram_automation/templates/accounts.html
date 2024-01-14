@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}shop{% endblock %}
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-8">
+        <section class="vh-70">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-4 mt-5">
+                        <div class="modal-dialog modal-dialog-centered mt-5">
+                            <div class="modal-content">
+                                <div class="card " style="border-radius: 15px;">
+                                    <div class="card-body p-3 align-items-center">
+                                        <h3 class="text-uppercase text-center mb-3">Add Instagram Account</h3>
+                                        <form class="d-flex flex-column mt-n4" action="addaccount" method="post">
+                                            {% csrf_token %}
+                                            <div class="form-outline mb-3 justify-content-center">
+                                                <input type="text" id="form3Example1cg" name="username"
+                                                    class="form-control form-control-sm" />
+                                                <label class="form-label" for="form3Example1cg">Account username</label>
+                                            </div>
+
+                                            <div class="form-outline mb-3 justify-content-center">
+                                                <input type="password" name="pass" id="form3Example4cg"
+                                                    class="form-control form-control-sm" />
+                                                <label class="form-label" for="form3Example4cg">Password</label>
+                                            </div>
+
+                                            <div class="form-outline mb-3 justify-content-center">
+                                                <input type="password" name="repeatpass" id="form3Example4cdg"
+                                                    class="form-control form-control-sm" />
+                                                <label class="form-label" for="form3Example4cdg">Repeat your
+                                                    password</label>
+                                            </div>
+
+                                            <div class="d-flex justify-content-center">
+                                                <button type="submit" class="btn btn-success btn-sm btn-block text-body">add
+                                                    account</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="col-md-4">
+        <section class="vh-70">
+            <div class="container">
+                <!-- Adjust col-md-4 to col-md-12 to make the right side take the entire width -->
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-12 col-lg-12 mt-5">
+                        <div class="modal-dialog modal-dialog-centered mt-5">
+                            <div class="modal-content">
+                                <div class="card " style="border-radius: 15px;">
+                                    <div class="card-body p-3 align-items-center">
+                                        <div class="card mask-custom">
+                                            <div class="card-body p-2 text-white">
+                                                <div class="text-center pt-1 pb-1">
+                                                    <h2 class="my-4">Accounts List</h2>
+                                                    <i class="bi bi-person" style="font-size: 60px; color: #ffffff;"></i>
+                                                </div>
+                                                <table class="table text-white mb-0">
+                                                    <thead>
+                                                        
+                                                        <tr>
+                                                            <th scope="col">Account</th>
+                                                            <th scope="col">Status</th>
+                                                            <th scope="col">Delete</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {% for account in acc %} 
+                                                        <tr class="fw-normal">
+                                                            
+                                                            <td class="align-middle">
+                                                                <a href="{% url 'accountsetup' account_id=account.id %}">{{account.username}}</a>
+                                                            </td>
+                                                            {% if account.follow_status and account.post_status and account.unfollow_status %}
+
+                                                                <td class="align-middle">
+                                                                    <h6 class="mb-0"><span
+                                                                            class="badge bg-success">AlL Active</span></h6>
+                                                                </td>
+                                                            {% elif account.follow_status and account.post_status %}
+                                                                <td class="align-middle">
+                                                                    <h6 class="mb-0"><span
+                                                                            class="badge bg-success">Follow/Post Active</span></h6>
+                                                                </td>
+                                                            {% elif account.unfollow_status and account.post_status %}
+                                                                <td class="align-middle">
+                                                                    <h6 class="mb-0"><span
+                                                                            class="badge bg-success">Unfollow/post Active</span></h6>
+                                                                </td>
+                                                            {% elif account.unfollow_status and account.follow_status %}
+                                                                <td class="align-middle">
+                                                                    <h6 class="mb-0"><span
+                                                                            class="badge bg-success">follow/unfollow Active</span></h6>
+                                                                </td>
+                                                            {% elif account.follow_status %}
+                                                                <td class="align-middle">
+                                                                    <h6 class="mb-0"><span
+                                                                            class="badge bg-success">Follow Active</span></h6>
+                                                                </td>
+                                                            {% elif account.unfollow_status %}
+                                                                <td class="align-middle">
+                                                                    <h6 class="mb-0"><span
+                                                                            class="badge bg-success">Unfollow Active</span></h6>
+                                                                </td>
+                                                            {% elif account.post_status %}
+                                                                <td class="align-middle">
+                                                                    <h6 class="mb-0"><span
+                                                                            class="badge bg-success">Post Active</span></h6>
+                                                                </td>
+                                                            {% else %}
+                                                                <td class="align-middle">
+                                                                    <h6 class="mb-0"><span
+                                                                            class="badge bg-danger">All Deactivated</span></h6>
+                                                                </td>
+                                                            
+                                                            {% endif %}
+                                                            <td class="align-middle">
+                                                                <a href="{% url 'deletefollowaccount' account_id=account.id %}" data-mdb-toggle="tooltip" title="Delete account"><i
+                                                                        class="fas fa-trash-alt fa-lg text-warning"></i></a>
+                                                            </td>
+
+                                                        </tr>
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

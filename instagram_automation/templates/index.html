@@ -1,0 +1,29 @@
+{%extends 'base.html' %}
+{% load static  %}
+
+{% block title %}shop{% endblock %}
+{% block links %}
+<link rel="stylesheet" href="{% static 'css/test.css' %}">
+
+{% endblock %}
+{% block body %}
+<div class="container">
+  <div class="row justify-content-center ">
+    <div class="col-12 col-md-8 col-lg-4 mt-5">
+      <div class="text-center mt-5">
+        <div class="text-center mt-5">
+          <p class="fw-bolder fs-4 justify-content-center mt-3 " style="color: #fff;">Welcome to <span style="color: #1ad5cc;">INSTA</span><span style="color: #fff;">BOT</span></p>
+          <p class="fw-bolder fs-4 justify-content-center mt-1 " style="color: #fff;">Your Friendly Instagram Automator</p>
+          <div class="d-flex justify-content-center mt-3">
+            <a href="{% url 'accounts' %}" class="btn btn-primary btn-sm text-body me-2">Accounts</a>
+            <a href="{% url 'control' %}" class="btn btn-primary btn-sm text-body ">Control Board</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
